@@ -76,4 +76,7 @@
 		</plugins>
 	</build>
 
+	<modules>
+		<module>reducer</module>
+	</modules>
 </project>
