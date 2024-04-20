@@ -79,5 +79,6 @@
 	<modules>
 		<module>sensors</module>
 		<module>containerProvider</module>
+		<module>analyzer</module>
 	</modules>
 </project>

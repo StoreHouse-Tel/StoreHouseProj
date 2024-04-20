@@ -1,7 +1,6 @@
 package com.storehouse.ContainerProvider.controller;
 
 
-import com.storehouse.ContainerProvider.model.Container;
 import com.storehouse.ContainerProvider.service.ContainerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
