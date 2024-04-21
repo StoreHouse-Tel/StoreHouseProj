@@ -84,5 +84,6 @@
 
 		<module>reducer</module>
 
+		<module>autoFill</module>
 	</modules>
 </project>
