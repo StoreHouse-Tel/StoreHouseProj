@@ -5,7 +5,9 @@ import com.storehouse.ContainerProvider.service.ContainerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -34,4 +36,16 @@ public class ContainerController {
     public Object containerLackQuantity(@PathVariable String name) {
         return service.containerLackQuantity(name);
     }
+    
+    @GetMapping("/{name}/populator-current-percentage")
+    public Object getPopulatorCurrentPercentage(@PathVariable String name) {
+        return service.getPopulatorCurrentPercentage(name);
+    }
+    
+    @PutMapping("/{name}/populator-current-percentage-{percentage}")
+    public Object changePopulatorCurrentPercentage(@PathVariable String name,
+    		@PathVariable int percentage) {
+        return service.changePopulatorCurrentPercentage(name, percentage);
+    }
+    
 }

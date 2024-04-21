@@ -24,8 +24,8 @@ public class SensorService {
             log.info("No sensors found in database");
         } else {
             sensors.forEach(sensor -> {
-                double fillPercentage = (double) sensor.getQuantity() / sensor.getMaxCapacity() * 100;
-                String message = String.format("{\"name\":\"%s\", \"fillPercentage\":%.2f}", sensor.getName(), fillPercentage);
+                int fillPercentage = (int) sensor.getQuantity() / sensor.getMaxCapacity() * 100;
+                String message = String.format("{\"name\":\"%s\", \"fillPercentage\":%d}", sensor.getName(), fillPercentage);
                 log.info("Sending message: {}", message);
                 kafkaSender.sendMessage("sensor-topic", message);
             });

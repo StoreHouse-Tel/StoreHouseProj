@@ -53,9 +53,9 @@ public class ContainerServiceTest {
         container.setMaxCapacity(400);
         when(containerRepository.findByName("A1")).thenReturn(Optional.of(container));
 
-        Optional<Double> result = containerService.getContainerFillPercentage("A1");
+        Optional<Integer> result = containerService.getContainerFillPercentage("A1");
         assertThat(result.isPresent()).isTrue();
-        assertThat(result.get()).isEqualTo(50.0);
+        assertThat(result.get()).isEqualTo(50);
     }
 
     @Test
