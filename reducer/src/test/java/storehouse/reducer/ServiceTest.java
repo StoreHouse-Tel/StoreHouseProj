@@ -29,22 +29,22 @@ public class ServiceTest {
 	ContainerOccupationService containerOccupationService;	
 	@MockBean
 	StoreDataRepo storeDataRepo;
-	Map<String, Double> testMap = null;
+	Map<String, Integer> testMap = null;
 	
 	final String STORE_ID_IN_REDIS_RECORD = "A";
-	final StoreData STORE_DATA_IN_REDIS_RECORD = StoreData.fromDto(new StoreDataDto(STORE_ID_IN_REDIS_RECORD, 10.));
-	final StoreData UPDATED_STORE_DATA_IN_REDIS_RECORD = StoreData.fromDto(new StoreDataDto(STORE_ID_IN_REDIS_RECORD, 20.));
+	final StoreData STORE_DATA_IN_REDIS_RECORD = StoreData.fromDto(new StoreDataDto(STORE_ID_IN_REDIS_RECORD, 10));
+	final StoreData UPDATED_STORE_DATA_IN_REDIS_RECORD = StoreData.fromDto(new StoreDataDto(STORE_ID_IN_REDIS_RECORD, 20));
 	
 	
 	
 	final String STORE_ID_NO_REDIS_RECORD = "F";
-	final StoreData STORE_DATA_NO_REDIS_RECORD = StoreData.fromDto(new StoreDataDto(STORE_ID_NO_REDIS_RECORD, 10.));
+	final StoreData STORE_DATA_NO_REDIS_RECORD = StoreData.fromDto(new StoreDataDto(STORE_ID_NO_REDIS_RECORD, 10));
 	
 	
 	
 	@BeforeEach
 	void setup() {
-		testMap = new HashMap<String, Double>(Map.of("A", Double.valueOf(10.), "B", Double.valueOf(20.), "C", Double.valueOf(100.), "D", Double.valueOf(50.)));
+		testMap = new HashMap<String, Integer>(Map.of("A", 10, "B", 20, "C", 100, "D", 50));
 	}
 	
 	@Test
@@ -54,7 +54,7 @@ public class ServiceTest {
 			@Override
 			public StoreData answer(InvocationOnMock invocation) throws Throwable {
 				StoreDataDto invocationStoreData = ((StoreData) invocation.getArgument(0)).toDto(); 
-				testMap.put(invocationStoreData.id(), invocationStoreData.occupation());
+				testMap.put(invocationStoreData.name(), invocationStoreData.fillPercentage());
 				return invocation.getArgument(0);
 			}
 		});
@@ -80,7 +80,7 @@ public class ServiceTest {
 			@Override
 			public StoreData answer(InvocationOnMock invocation) throws Throwable {
 				StoreDataDto invocationStoreData = ((StoreData) invocation.getArgument(0)).toDto(); 
-				testMap.put(invocationStoreData.id(), UPDATED_STORE_DATA_IN_REDIS_RECORD.toDto().occupation());
+				testMap.put(invocationStoreData.name(), UPDATED_STORE_DATA_IN_REDIS_RECORD.toDto().fillPercentage());
 				return invocation.getArgument(0);
 			}
 		});
