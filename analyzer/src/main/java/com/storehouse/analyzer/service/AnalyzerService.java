@@ -29,7 +29,7 @@ public class AnalyzerService {
         try {
             ItemUpdate itemUpdate = objectMapper.readValue(message, ItemUpdate.class);
             log.info("message-> {}",itemUpdate.name() );
-            double threshold = restTemplate.getForObject("http://localhost:8082/api/container/{name}/threshold", Double.class, itemUpdate.name());
+            int threshold = restTemplate.getForObject("http://localhost:8082/api/container/{name}/threshold", Integer.class, itemUpdate.name());
 
           
             if (itemUpdate != null && threshold  < itemUpdate.fillPercentage()) {

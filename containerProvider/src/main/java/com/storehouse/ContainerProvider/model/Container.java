@@ -25,5 +25,5 @@ public class Container {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private int threshold;
-
+    private int populatorCurrentPercentage;
 }
