@@ -22,7 +22,7 @@ public class ContainerOccupationServiceImpl implements ContainerOccupationServic
 	public StoreDataDto getChangedOccupationLevelFor(StoreDataDto currentDataDto) {
 		AtomicReference<StoreDataDto> resultStoreDataDtoRef = new AtomicReference<>(null);
 		storeDataRepo
-			.findById(currentDataDto.id())
+			.findById(currentDataDto.name())
 			.ifPresentOrElse(
 				(storedStoreData) -> {
 					StoreDataDto storedStoreDataDto = storedStoreData.toDto();

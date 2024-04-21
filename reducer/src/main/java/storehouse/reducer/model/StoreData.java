@@ -15,12 +15,12 @@ import storehouse.reducer.dto.StoreDataDto;
 @AllArgsConstructor
 public class StoreData {
 	@Id
-	String sensorId;
-	Double occupation;
+	String name;
+	Integer fillPercentage;
 	
 	@Override
 	public int hashCode() {
-		return Objects.hashCode(sensorId);
+		return Objects.hashCode(name);
 	}
 	
 	@Override
@@ -32,15 +32,15 @@ public class StoreData {
 		if (getClass() != obj.getClass())
 			return false;
 		StoreData other = (StoreData) obj;
-		return sensorId == other.sensorId;
+		return name.equals(other.name);
 	}
 	
 	public StoreDataDto toDto() {
-		return new StoreDataDto(sensorId, occupation);
+		return new StoreDataDto(name, fillPercentage);
 	}
 	
 	static public StoreData fromDto(StoreDataDto storeDataDto) {
-		return new StoreData(storeDataDto.id(), storeDataDto.occupation()); 
+		return new StoreData(storeDataDto.name(), storeDataDto.fillPercentage()); 
 	}
 	
 }
