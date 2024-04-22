@@ -81,8 +81,7 @@
 		<module>sensors</module>
 		<module>containerProvider</module>
 		<module>analyzer</module>
-
 		<module>reducer</module>
-
+		<module>populator</module>
 	</modules>
 </project>
