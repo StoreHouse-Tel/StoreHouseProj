@@ -78,5 +78,6 @@
 
 	<modules>
 		<module>reducer</module>
+		<module>populator</module>
 	</modules>
 </project>
