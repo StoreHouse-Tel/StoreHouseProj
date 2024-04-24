@@ -21,15 +21,15 @@ public class StreamMessageConfiguration {
 	Consumer<String> storeDataPopulatorHandler() {
 		log.debug("Bean Consumer storeDataPopulatorHandler created");
 		return (String json) -> {
-			StoreDataDto storeDataDto = null;
 			try {
-				storeDataDto = objectMapper.readValue(json, StoreDataDto.class);
-			} catch (IOException e) {
+				StoreDataDto storeDataDto = objectMapper.readValue(json, StoreDataDto.class);
+				log.trace("Received data from message broker: {}", storeDataDto);
+				populatorService.putCurrentPercentage(storeDataDto);
+			} catch (Exception e) {
 				log.error("Exception while reading the reseived message: {}", e.getMessage());
 				e.printStackTrace();
 			} 
-			log.trace("Received data from message broker: {}", storeDataDto);
-			populatorService.putCurrentPercentage(storeDataDto);
+	
 		};
 	}
 }
