@@ -85,5 +85,6 @@
 		<module>autoFill</module>
 		<module>populator</module>
 
+		<module>orderProvider</module>
 	</modules>
 </project>
