@@ -86,5 +86,6 @@
 		<module>populator</module>
 
 		<module>orderProvider</module>
+		<module>OpenOrder</module>
 	</modules>
 </project>
