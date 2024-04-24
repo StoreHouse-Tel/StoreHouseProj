@@ -93,12 +93,11 @@ public class MessageStreaTest {
 	
 	@Test
 	void testSendUpdatedData() throws Exception{
-//		inputStream.send(new GenericMessage<String>(STORE_DATA_CHANGED_STRING), inputBindingName);
-//		Message<byte[]> message = outputStream.receive(10, outputBindingName);
-//		assertNotNull(message);
-//		ObjectMapper mapper = new ObjectMapper();
-//		String actual = mapper.readValue(message.getPayload(), String.class);
-//		assertEquals(STORE_DATA_CHANGED_STRING, actual);
+		inputStream.send(new GenericMessage<String>(STORE_DATA_CHANGED_STRING), inputBindingName);
+		Message<byte[]> message = outputStream.receive(100, outputBindingName);
+		assertNotNull(message);
+		String actual = new String(message.getPayload(), StandardCharsets.UTF_8);
+		assertEquals(STORE_DATA_CHANGED_STRING, actual);
 		
 	}
 	
