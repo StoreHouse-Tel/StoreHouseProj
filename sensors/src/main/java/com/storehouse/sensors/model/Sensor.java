@@ -21,5 +21,6 @@ public class Sensor {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private int threshold;
+    private int populatorCurrentPercentage;
 
 }

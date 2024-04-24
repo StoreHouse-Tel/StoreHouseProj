@@ -34,7 +34,7 @@ public class AnalyzerService {
           
             if (itemUpdate != null && threshold  < itemUpdate.fillPercentage()) {
                 log.info("container-> {} threshold -> {}",itemUpdate.name() ,itemUpdate.fillPercentage());
-                kafkaTemplate.send("Threshold-alert", "ContainerName: " + itemUpdate.name() + " ThresholdAlert: "+ threshold);
+                kafkaTemplate.send("threshold-alert", "ContainerName: " + itemUpdate.name() + " ThresholdAlert: "+ threshold);
             }
         } catch (Exception e) {
             e.printStackTrace();
