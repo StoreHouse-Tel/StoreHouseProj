@@ -8,6 +8,9 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.storehouse.OpenOrder.model.Order;
 
 import lombok.extern.slf4j.Slf4j;
@@ -20,14 +23,17 @@ public class OpenOrderService {
 	@Autowired
     private RestTemplate restTemplate;
 	
-
+	 private ObjectMapper objectMapper = new ObjectMapper();
     
 	
 	
-	 @KafkaListener(topics = "create-order", groupId = "orderGroup")
-	    public void consumeAndCreateOrder(Order order) {
+	 @KafkaListener(topics = "create-order", groupId = "my-group")
+	    public void consumeAndCreateOrder(String message) {
 	        
-		 String url = "http://localhost:8086/orders";
+		 Order order;
+		try {
+			order = objectMapper.readValue(message,Order.class);
+			String url = "http://localhost:8085/orders";
 	        
 	        HttpHeaders headers = new HttpHeaders();
 	        headers.setContentType(MediaType.APPLICATION_JSON);
@@ -41,6 +47,12 @@ public class OpenOrderService {
 	        } else {
 	        	 log.info("Failed to create order. Response code: " + response.getStatusCode());
 	        }
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		} 
+		 
+		 
 	        
 	       
 	    }
