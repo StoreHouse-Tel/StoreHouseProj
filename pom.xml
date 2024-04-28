@@ -84,6 +84,7 @@
 		<module>reducer</module>
 		<module>autoFill</module>
 		<module>populator</module>
-
+		<module>gateway</module>
+		<module>account-provider</module>
 	</modules>
 </project>
