@@ -17,8 +17,8 @@ public class OrderService {
     private OrderRepository orderRepository;
 
     public  String createOrder(Order order) {
-    	boolean checkOrderExist = checkOrderExists(order.getContainerName());
-    	if(checkOrderExist) {
+    	 Order checkOrderExist = checkOrderExists(order.getContainerName());
+         if (checkOrderExist != null) {
     		log.info("the order already exists in the database for container {}",order.getContainerName());
     		return "order already exists";
     	}else {
@@ -35,10 +35,27 @@ public class OrderService {
         orderRepository.deleteByContainerName(containerName);
     }
 
-    public boolean checkOrderExists(String containerName) {
-        return orderRepository.findByContainerName(containerName) != null;
+    public Order checkOrderExists(String containerName) {
+        return orderRepository.findByContainerName(containerName);
     }
     
+    public String editOrder(Order order) {
+        // Check if the order exists
+        Order checkOrderExist = checkOrderExists(order.getContainerName());
+        if (checkOrderExist == null) {
+            log.info("The order does not exist in the database for container {}", order.getContainerName());
+            return "Order does not exist";
+        } else {
+            // Get the existing order
+            Order existingOrder = orderRepository.findByContainerName(order.getContainerName());
+            // Update the fields
+            existingOrder.setQuantity(order.getQuantity());
+            // Save the updated order
+            orderRepository.save(existingOrder);
+            log.info("Order updated successfully for container {}", order.getContainerName());
+        }
+        return "Order updated successfully";
+    }
     
     public List<Order> getAllOrders() {
         return orderRepository.findAll();

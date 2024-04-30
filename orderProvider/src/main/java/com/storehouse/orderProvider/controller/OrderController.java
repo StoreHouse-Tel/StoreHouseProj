@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -40,8 +41,14 @@ public class OrderController {
     }
 
     @GetMapping("/{containerName}")
-    public boolean checkOrderExists(@PathVariable String containerName) {
+    public Order checkOrderExists(@PathVariable String containerName) {
         return orderService.checkOrderExists(containerName);
+    }
+    @PutMapping("/edit/{containerName}")
+    public String editOrder(@PathVariable String containerName, @RequestBody Order order) {
+        log.info("Edit order start for container {}", containerName);
+        order.setContainerName(containerName); 
+        return orderService.editOrder(order);
     }
     
     @GetMapping
